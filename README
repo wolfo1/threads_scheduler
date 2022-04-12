@@ -1,0 +1,40 @@
+omri.wolf1, galbum
+Omri Wolf (204867881), Gabi Album (316563949)
+EX: 2
+
+FILES:
+uthreads.cpp
+Scheduler.cpp
+Scheduler.h
+Thread.cpp
+Thread.h
+Makefile
+
+ANSWERS:
+Part 1:
+
+1. One general use is application which utilise many threads. Applications like this will prefer to operate in user-level thread
+	because it's faster to switch between threads.
+
+2. Advantages:
+	* Security - each tab has it's own memory, so accessing data from one tab by a malicious tab will be difficult.
+	* Stability - when each tab is it's own process, if one tab crashes the rest will keep running.
+   Disadvantages:
+	* High overhead compared to threads, everything requires a trap.
+	* Memory code duplicates - the memory contains the code of the chrome tab program for each tab.
+	* Slower switching from process to process compared to threads.
+
+3. When typing "kill pid", each keystroke is an interrupt that gets sent to the OS, that types the letter into the console.
+   when hitting ENTER, SHELL traps the OS, which sends a SIGTERM signal to the process, which then can decide
+   to trap or not to trap the signal (as SIGTERM can be trapped, unlike SIGKILL which cannot be trapped).
+   in our case the process didn't trap the signal and terminated succesfully.
+  
+4. Real time is the time a job runs including interupts, and virtual time is the CPU time required to complete the job, without
+   interupts. For example we will use real time measurment when we are trying to measure the overhead of a job, and virtual time
+   to measure of efficent it is on it's own (without OS interupts and such).
+
+5. sigsetjmp - Saves a struct of the  current enviorment (TCB - SP, PC, etc) of the thread.
+   siglongjmp - switches the enviroment to the enviroment struct that was saved earlier by sigsetjmp.
+   siglongjmp also takes another parameter which will specify what will sigsetjmp will return after returning to it,
+   since the PC was on sigsetjmp when the enviroment was saved.
+   So, if sigsetjmp was invoked directly, will return 0. otherwise will return what was specified by siglongjmp.
